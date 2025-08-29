@@ -1,0 +1,62 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ]
+    },
+    "supabase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--project-ref=jynohthgnuiexluaxkcc"
+      ],
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "sbp_8c6fed54212d76e4ce8460ffc03c3104aa5b1723"
+      }
+    },
+        "brave-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "env": {
+        "BRAVE_API_KEY": "BSArilOtuafus7ESZ2lAW4HTpUV-lIM"
+      }
+    },
+    "firecrawl-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "firecrawl-mcp"
+      ],
+      "env": {
+        "FIRECRAWL_API_KEY": "fc-cfacdb5ea7404eb4b44ab0acdd7543de"
+      }
+    },
+        "n8n-mcp": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e", "MCP_MODE=stdio",
+        "-e", "LOG_LEVEL=error",
+        "-e", "DISABLE_CONSOLE_OUTPUT=true",
+        "-e", "N8N_API_URL=https://zzn8n.danielcarreon.site/api/v1",
+        "-e", "N8N_API_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3OTE5ODc5Yy1hZmJiLTQxNjYtOTVkOC1lYmM2NGVkNzQzYzgiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwiaWF0IjoxNzUxODExNjA2fQ.vhvAZJ0BFIhladtQpXGEwdctxv1dX5tgtzXTTY1Tds4",
+        "ghcr.io/czlonkowski/n8n-mcp:latest"
+      ]
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    }
+  }
+}
