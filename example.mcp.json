@@ -11,20 +11,20 @@
       "args": [
         "-y",
         "@supabase/mcp-server-supabase@latest",
-        "--project-ref=jynohthgnuiexluaxkcc"
+        "--project-ref=YOUR_SUPABASE_PROJECT_REF"
       ],
       "env": {
-        "SUPABASE_ACCESS_TOKEN": "sbp_8c6fed54212d76e4ce8460ffc03c3104aa5b1723"
+        "SUPABASE_ACCESS_TOKEN": "YOUR_SUPABASE_ACCESS_TOKEN"
       }
     },
-        "brave-search": {
+    "brave-search": {
       "command": "npx",
       "args": [
         "-y",
         "@modelcontextprotocol/server-brave-search"
       ],
       "env": {
-        "BRAVE_API_KEY": "BSArilOtuafus7ESZ2lAW4HTpUV-lIM"
+        "BRAVE_API_KEY": "YOUR_BRAVE_API_KEY"
       }
     },
     "firecrawl-mcp": {
@@ -34,10 +34,10 @@
         "firecrawl-mcp"
       ],
       "env": {
-        "FIRECRAWL_API_KEY": "fc-cfacdb5ea7404eb4b44ab0acdd7543de"
+        "FIRECRAWL_API_KEY": "YOUR_FIRECRAWL_API_KEY"
       }
     },
-        "n8n-mcp": {
+    "n8n-mcp": {
       "command": "docker",
       "args": [
         "run",
@@ -46,8 +46,8 @@
         "-e", "MCP_MODE=stdio",
         "-e", "LOG_LEVEL=error",
         "-e", "DISABLE_CONSOLE_OUTPUT=true",
-        "-e", "N8N_API_URL=https://zzn8n.danielcarreon.site/api/v1",
-        "-e", "N8N_API_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3OTE5ODc5Yy1hZmJiLTQxNjYtOTVkOC1lYmM2NGVkNzQzYzgiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwiaWF0IjoxNzUxODExNjA2fQ.vhvAZJ0BFIhladtQpXGEwdctxv1dX5tgtzXTTY1Tds4",
+        "-e", "N8N_API_URL=YOUR_N8N_API_URL",
+        "-e", "N8N_API_KEY=YOUR_N8N_API_KEY",
         "ghcr.io/czlonkowski/n8n-mcp:latest"
       ]
     },
