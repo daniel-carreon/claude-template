@@ -294,6 +294,120 @@ docs(readme): update installation steps
 3. **Project-specific files** (package.json, etc.)
 4. **General best practices**
 
+## 🚀 Pre-Development Validation Protocol
+
+### API & Dependencies Current Check
+**CRÍTICO**: Siempre verificar antes de asumir
+- [ ] ✅ Verificar que las versiones de APIs/modelos existen (ej: GPT-5 no existe aún)
+- [ ] ✅ Confirmar que las librerías están actualizadas
+- [ ] ✅ Validar endpoints externos funcionan
+- [ ] ✅ Tener fallbacks para todas las dependencias externas
+
+### Simplicity-First Development
+- [ ] ✅ Crear versión simplificada primero (`simple_main.py`)
+- [ ] ✅ Probar funcionalidad básica antes de agregar complejidad
+- [ ] ✅ Mantener siempre una versión "modo demo" que funcione
+- [ ] ✅ Implementar mock data para casos donde servicios externos fallen
+
+### Incremental Validation Strategy
+- [ ] ✅ Probar cada endpoint inmediatamente después de crearlo
+- [ ] ✅ Usar TodoWrite para tracking sistemático de progreso
+- [ ] ✅ Validar UI después de cada cambio importante
+- [ ] ✅ Mantener logs detallados de errores para debugging
+
+## 🔄 Error-First Development Protocol
+
+### Manejo de Errores Predictivos
+```python
+# ✅ GOOD: Siempre incluir fallbacks
+try:
+    ai_result = await openai_call()
+except Exception as e:
+    print(f"AI call failed: {e}")
+    ai_result = get_mock_fallback()  # Siempre tener fallback
+```
+
+### Debugging Sin Visibilidad Directa
+- **Usar logs extensivos** con emojis para fácil identificación
+- **Crear endpoints de testing** (`/test-connection`, `/health`)  
+- **Implementar timeouts** en todas las llamadas externas
+- **Hacer requests incrementales** - nunca asumir que algo complejo funcionará
+
+## 🎯 Advanced Real-Time Debugging (Expert Level)
+
+### Background Log Streaming Setup
+```bash
+# 1. Start dev servers with log capture
+npm run dev 2>&1 | tee frontend.log
+uvicorn main:app --reload 2>&1 | tee backend.log
+
+# 2. Monitor logs in real-time (Claude Code)
+tail -f frontend.log | claude -p "Alert me of compilation errors"
+
+# 3. Use Background Commands (Ctrl+B)
+npm run dev  # Press Ctrl+B to run in background
+# Then use BashOutput tool to monitor status
+```
+
+### Claude Code Web Interface
+```bash
+# Install web interface for visual log monitoring
+npm install -g claude-code-web
+claude-code-web --debug  # Enhanced logging mode
+
+# Or use alternative: 
+npx claude-code-web --dev  # Development mode with verbose logs
+```
+
+### Multi-Terminal Monitoring Pattern
+```bash
+# Terminal 1: Backend with structured logging
+python -m uvicorn main:app --reload --log-level debug
+
+# Terminal 2: Frontend with compilation monitoring
+npm run dev -- --verbose
+
+# Terminal 3: Claude Code with combined log analysis
+tail -f *.log | claude -p "Debug any compilation or runtime errors immediately"
+```
+
+### Background Task Management
+- **Use Ctrl+B** para run commands in background
+- **BashOutput tool** para retrieving incremental output
+- **Filter logs** for specific patterns (ERROR, WARN, Compil)
+- **Status tracking** (running/completed/killed)
+
+## 🎨 Bucle Agéntico con Playwright MCP
+
+### Metodología de Desarrollo Visual
+**Problema:** IA genera frontends genéricos sin poder ver el resultado  
+**Solución:** Playwright MCP otorga "ojos" al AI para iteración visual
+
+### Bucle Agéntico Frontend
+```
+1. Código UI → 2. Playwright Screenshot → 3. Visual Compare → 4. Iterate
+```
+
+### Playwright MCP Integration
+- **browser_snapshot**: Captura estado actual de la página
+- **browser_take_screenshot**: Screenshots para comparación visual
+- **browser_navigate**: Navegación automática para testing
+- **browser_click/type**: Interacción automatizada con UI
+- **browser_resize**: Testing responsive en diferentes viewports
+
+### Visual Development Protocol
+1. **Implementar componente** siguiendo specs
+2. **Capturar screenshot** con Playwright
+3. **Comparar vs design requirements**
+4. **Iterar automáticamente** hasta pixel-perfect
+5. **Validar responsiveness** en mobile/tablet/desktop
+
+### Integration con Design Review
+- Activar review visual automático post-implementación
+- Usar criterios objetivos de diseño (spacing, colors, typography)
+- Generar feedback específico y accionable
+- Prevenir frontends genéricos mediante validación visual
+
 ---
 
 *Este archivo es la fuente de verdad para desarrollo en este proyecto. Todas las decisiones de código deben alinearse con estos principios.*
