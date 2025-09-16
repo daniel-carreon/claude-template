@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50;
+    @apply px-4 py-2 h-10;
+  }
+
+  .btn-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-200 text-gray-900 hover:bg-gray-300;
+  }
+
+  .btn-sm {
+    @apply px-2 py-1 h-8 text-xs;
+  }
+
+  .image-grid {
+    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 p-4;
+  }
+
+  .image-card {
+    @apply relative group overflow-hidden rounded-lg border shadow-sm transition-all hover:shadow-md cursor-pointer;
+  }
+
+  .image-card.selected {
+    @apply ring-2 ring-blue-500 ring-offset-2;
+  }
+}
