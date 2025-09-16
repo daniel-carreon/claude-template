@@ -146,7 +146,7 @@ export default function HomePage() {
           </h2>
           <div className="image-grid">
             {generatedImages.map((image) => (
-              <div key={image.id} className="image-card">
+              <div key={image.id} className="image-card group">
                 <img
                   src={image.url}
                   alt={`Generated from: ${image.prompt}`}

@@ -37,7 +37,7 @@
   }
 
   .image-card {
-    @apply relative group overflow-hidden rounded-lg border shadow-sm transition-all hover:shadow-md cursor-pointer;
+    @apply relative overflow-hidden rounded-lg border shadow-sm transition-all hover:shadow-md cursor-pointer;
   }
 
   .image-card.selected {
