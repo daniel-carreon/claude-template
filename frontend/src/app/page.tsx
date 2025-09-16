@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import { useImageStore } from '@/shared/stores/imageStore'
+import GlassCard from '@/components/ui/glass-card'
+import { LiquidButton } from '@/components/ui/liquid-glass-button'
 
 interface ApiResponse {
   images: Array<{
@@ -16,6 +18,7 @@ interface ApiResponse {
 
 export default function HomePage() {
   const [prompt, setPrompt] = useState('')
+  const [numImages, setNumImages] = useState(10)
   const {
     isGenerating,
     generatedImages,
@@ -69,7 +72,7 @@ export default function HomePage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({ prompt, numImages }),
       })
 
       if (!response.ok) {
@@ -98,11 +101,11 @@ export default function HomePage() {
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       {/* Prompt Input Section */}
-      <div className="bg-white rounded-lg shadow-sm border p-6">
-        <h2 className="text-lg font-semibold mb-4">Generate Images</h2>
+      <GlassCard variant="dark" className="purple-glow">
+        <h2 className="text-xl font-bold mb-6 text-white">🎨 Generate Images</h2>
         <div className="space-y-4">
           <div>
-            <label htmlFor="prompt" className="block text-sm font-medium mb-2">
+            <label htmlFor="prompt" className="block text-sm font-medium mb-2 text-purple-200">
               Describe your image
             </label>
             <textarea
@@ -110,39 +113,61 @@ export default function HomePage() {
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               placeholder="DANI portrait for tech review thumbnail"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 bg-black/30 border border-purple-500/30 rounded-lg backdrop-blur-sm text-white placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-400 transition-all"
               rows={3}
               disabled={isGenerating}
             />
           </div>
-          <button
+          <div>
+            <label htmlFor="numImages" className="block text-sm font-medium mb-2 text-purple-200">
+              Number of images: <span className="text-purple-400 font-bold">{numImages}</span>
+            </label>
+            <input
+              id="numImages"
+              type="range"
+              min="1"
+              max="10"
+              value={numImages}
+              onChange={(e) => setNumImages(parseInt(e.target.value))}
+              className="w-full h-2 bg-purple-900/30 rounded-lg appearance-none cursor-pointer slider accent-purple-500"
+              disabled={isGenerating}
+            />
+            <div className="flex justify-between text-xs text-purple-300 mt-1">
+              <span>1</span>
+              <span>5</span>
+              <span>10</span>
+            </div>
+          </div>
+          <LiquidButton
             onClick={handleGenerate}
             disabled={isGenerating || !prompt.trim()}
-            className="btn btn-primary disabled:opacity-50"
+            variant="space"
+            size="xl"
+            className="disabled:opacity-50"
           >
-            {isGenerating ? 'Generating...' : 'Generate 10 Images'}
-          </button>
+            {isGenerating ? '🚀 Generating...' : `✨ Generate ${numImages} Images`}
+          </LiquidButton>
         </div>
-      </div>
+      </GlassCard>
 
       {/* Status Section */}
       {isGenerating && (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+        <GlassCard variant="purple" className="purple-glow">
           <div className="flex items-center space-x-3">
-            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-purple-400"></div>
             <div>
-              <p className="text-blue-800 font-medium">Generating 10 images...</p>
-              <p className="text-blue-600 text-sm">This may take 30-60 seconds</p>
+              <p className="text-purple-100 font-medium">🚀 Generating {numImages} images...</p>
+              <p className="text-purple-200 text-sm">This may take 30-60 seconds</p>
             </div>
           </div>
-        </div>
+        </GlassCard>
       )}
 
       {/* Results Grid */}
       {generatedImages.length > 0 && (
-        <div className="bg-white rounded-lg shadow-sm border p-6">
-          <h2 className="text-lg font-semibold mb-4">
-            Generated Images ({generatedImages.length})
+        <GlassCard variant="dark" className="purple-glow">
+          <h2 className="text-xl font-bold mb-6 text-white">
+            ✨ Generated Images ({generatedImages.length})
           </h2>
           <div className="image-grid">
             {generatedImages.map((image) => (
@@ -152,32 +177,41 @@ export default function HomePage() {
                   alt={`Generated from: ${image.prompt}`}
                   className="w-full h-32 object-cover"
                   loading="lazy"
+                  onError={(e) => {
+                    console.error('❌ Image failed to load:', image.url, e)
+                    e.currentTarget.style.border = '2px solid red'
+                  }}
+                  onLoad={() => console.log('✅ Image loaded successfully:', image.url)}
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all">
+                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all">
                   <div className="absolute bottom-2 left-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button
+                    <LiquidButton
                       onClick={() => handleSaveFavorite(image)}
-                      className="w-full btn btn-primary btn-sm"
+                      variant="space"
+                      size="sm"
+                      className="w-full"
                     >
                       ❤️ Save
-                    </button>
+                    </LiquidButton>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-        </div>
+        </GlassCard>
       )}
 
       {/* Empty State */}
       {!isGenerating && generatedImages.length === 0 && (
-        <div className="text-center py-12">
-          <div className="text-6xl mb-4">🎨</div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Ready to create</h3>
-          <p className="text-gray-600">
-            Enter a prompt above to generate 10 personalized images using your fine-tuned model
-          </p>
-        </div>
+        <GlassCard variant="dark" className="purple-glow">
+          <div className="text-center py-12">
+            <div className="text-6xl mb-4">🎨</div>
+            <h3 className="text-lg font-medium text-white mb-2">Ready to create</h3>
+            <p className="text-purple-200">
+              Enter a prompt above to generate 10 personalized images using your fine-tuned model
+            </p>
+          </div>
+        </GlassCard>
       )}
     </div>
   )

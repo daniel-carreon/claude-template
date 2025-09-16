@@ -1,0 +1,119 @@
+{
+  "summary": {
+    "tests_passed": 16,
+    "tests_failed": 2,
+    "success_rate": 88.88888888888889,
+    "mvp_status": "READY"
+  },
+  "detailed_results": [
+    {
+      "test": "Frontend Accessibility",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-09-15T18:59:30.905746"
+    },
+    {
+      "test": "Backend Health",
+      "success": false,
+      "details": "Error: Cannot connect to host localhost:8000 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('::1', 8000, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 8000)]",
+      "timestamp": "2025-09-15T18:59:30.906903"
+    },
+    {
+      "test": "API Endpoint /api/generate",
+      "success": true,
+      "details": "Status: 405",
+      "timestamp": "2025-09-15T18:59:31.173101"
+    },
+    {
+      "test": "API Endpoint /api/favorites",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-09-15T18:59:32.864031"
+    },
+    {
+      "test": "UI Component: GlassCard components",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-09-15T18:59:32.986443"
+    },
+    {
+      "test": "UI Component: Purple theme",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-09-15T18:59:32.986459"
+    },
+    {
+      "test": "UI Component: Dark theme",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-09-15T18:59:32.986461"
+    },
+    {
+      "test": "UI Component: Generate button",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-09-15T18:59:32.986465"
+    },
+    {
+      "test": "UI Component: Image grid",
+      "success": false,
+      "details": "",
+      "timestamp": "2025-09-15T18:59:32.986467"
+    },
+    {
+      "test": "File Structure: frontend/src/app/page.tsx",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-09-15T18:59:32.986611"
+    },
+    {
+      "test": "File Structure: frontend/src/app/layout.tsx",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-09-15T18:59:32.986624"
+    },
+    {
+      "test": "File Structure: frontend/src/app/globals.css",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-09-15T18:59:32.986633"
+    },
+    {
+      "test": "File Structure: frontend/src/components/ui/glass-card.tsx",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-09-15T18:59:32.986642"
+    },
+    {
+      "test": "File Structure: frontend/src/components/ui/liquid-glass-button.tsx",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-09-15T18:59:32.986648"
+    },
+    {
+      "test": "File Structure: backend/storage/compressed_images",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-09-15T18:59:32.986659"
+    },
+    {
+      "test": "File Structure: backend/train_flux_kontext.py",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-09-15T18:59:32.986666"
+    },
+    {
+      "test": "File Structure: backend/supabase_optimizer.py",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-09-15T18:59:32.986673"
+    },
+    {
+      "test": "Compressed Images",
+      "success": true,
+      "details": "Found 65 compressed images",
+      "timestamp": "2025-09-15T18:59:32.986771"
+    }
+  ],
+  "generated_at": "2025-09-15T18:59:32.987038"
+}

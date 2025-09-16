@@ -4,13 +4,50 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217 33% 17%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 262 83% 58%;
+    --radius: 0.5rem;
+  }
+
+  * {
+    border-color: hsl(var(--border));
   }
 
   body {
-    background-color: hsl(var(--background));
+    @apply bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen;
     color: hsl(var(--foreground));
+    background-attachment: fixed;
+  }
+
+  /* Space-themed gradients */
+  .space-gradient {
+    background: linear-gradient(135deg,
+      rgb(15, 23, 42) 0%,
+      rgb(88, 28, 135) 25%,
+      rgb(109, 40, 217) 50%,
+      rgb(147, 51, 234) 75%,
+      rgb(30, 41, 59) 100%);
+  }
+
+  .purple-glow {
+    box-shadow: 0 0 50px rgba(139, 92, 246, 0.3);
   }
 }
 
@@ -37,10 +74,19 @@
   }
 
   .image-card {
-    @apply relative overflow-hidden rounded-lg border shadow-sm transition-all hover:shadow-md cursor-pointer;
+    @apply relative overflow-hidden rounded-lg border border-purple-500/20 backdrop-blur-sm shadow-lg transition-all hover:shadow-xl cursor-pointer;
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
+  }
+
+  .image-card:hover {
+    border-color: rgba(139, 92, 246, 0.4);
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.2);
   }
 
   .image-card.selected {
-    @apply ring-2 ring-blue-500 ring-offset-2;
+    @apply ring-2 ring-purple-400 ring-offset-2 ring-offset-slate-900;
+    border-color: rgba(139, 92, 246, 0.8);
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.4);
   }
 }

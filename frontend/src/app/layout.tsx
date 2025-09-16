@@ -13,13 +13,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-        <header className="border-b bg-white/80 backdrop-blur-sm">
-          <div className="container mx-auto px-4 py-4">
-            <h1 className="text-2xl font-bold text-gray-900">
+      <body className="min-h-screen">
+        <header className="border-b border-white/10 bg-black/20 backdrop-blur-md">
+          <div className="container mx-auto px-4 py-6">
+            <h1 className="text-3xl font-bold text-white purple-glow">
               🎯 Daniel Flux Context
             </h1>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-purple-200 mt-1">
               AI-powered image generation for YouTube thumbnails
             </p>
           </div>

@@ -7,6 +7,7 @@ const replicate = new Replicate({
 
 interface GenerateRequest {
   prompt: string
+  numImages?: number
 }
 
 interface GeneratedImage {
@@ -18,7 +19,7 @@ interface GeneratedImage {
 
 export async function POST(request: NextRequest) {
   try {
-    const { prompt }: GenerateRequest = await request.json()
+    const { prompt, numImages = 10 }: GenerateRequest = await request.json()
 
     if (!prompt?.trim()) {
       return NextResponse.json(
@@ -39,9 +40,16 @@ export async function POST(request: NextRequest) {
 
     console.log('🎯 Generating images with enhanced prompt:', enhancedPrompt)
 
-    // Batch generation strategy: 3 calls to get 10 total images
-    // Call 1: 4 images, Call 2: 4 images, Call 3: 2 images
-    const batchSizes = [4, 4, 2]
+    // Dynamic batch generation strategy based on numImages
+    const batchSizes = []
+    const maxPerBatch = 4 // Replicate limit
+    let remaining = numImages
+
+    while (remaining > 0) {
+      const batchSize = Math.min(remaining, maxPerBatch)
+      batchSizes.push(batchSize)
+      remaining -= batchSize
+    }
     const allImages: string[] = []
 
     for (let i = 0; i < batchSizes.length; i++) {

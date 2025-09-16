@@ -27,7 +27,7 @@
         "./src/*"
       ],
       "@/components/*": [
-        "./src/shared/components/*"
+        "./src/components/*"
       ],
       "@/hooks/*": [
         "./src/shared/hooks/*"
